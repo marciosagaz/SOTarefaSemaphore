@@ -1,7 +1,7 @@
 package exec3;
 
 
-public class Main {
+public class Main3 {
 
 	/**
 	 * @param args
