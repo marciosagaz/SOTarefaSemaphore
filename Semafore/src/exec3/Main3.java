@@ -1,6 +1,5 @@
 package exec3;
 
-
 public class Main3 {
 
 	/**

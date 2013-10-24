@@ -2,11 +2,12 @@ package exec3;
 
 import java.util.concurrent.Semaphore;
 
-public class Tratador2 extends Thread{
+public class Tratador2 extends Thread {
 
 	Semaphore semaObs;
 	Semaphore semaTr2;
 	int count = 0;
+
 	public Tratador2(Semaphore semaTr2, Semaphore semaObs) {
 		this.semaObs = semaObs;
 		this.semaTr2 = semaTr2;
@@ -21,7 +22,7 @@ public class Tratador2 extends Thread{
 				e.printStackTrace();
 			}
 			count++;
-			if (count == 10){
+			if (count == 10) {
 				count = 0;
 				System.out.println("Tratador 2");
 			}
