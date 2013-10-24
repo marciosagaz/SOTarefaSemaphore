@@ -13,7 +13,7 @@ public class Expositor extends Thread {
 	@Override
 	public void run() {
 		while(true){
-			System.out.println("Estou em looping sou Expositor");
+			//System.out.println("Estou em looping sou Expositor");
 			salaExposicao.openExposicao();
 			try {
 				sleep(tempoExposicao);

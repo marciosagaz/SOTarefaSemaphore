@@ -18,12 +18,12 @@ public class Portaria extends Thread{
 	
 	public void run() {
 		while (true){
-			System.out.println("Estou em looping sou Portaria");
+			//System.out.println("Estou em looping sou Portaria");
 			(new Visitante(sala)).start();
 			int tempo = timeOfCheckin.nextInt(maxTime);
 			if (tempo < 0)tempo = 1;
 			try {
-				Thread.sleep(tempo);
+				sleep(tempo);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
