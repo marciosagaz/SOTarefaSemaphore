@@ -22,9 +22,8 @@ public class SalaExposicao {
 	}
 
 	public void entrarNaExposicao(Visitante visitante) throws InterruptedException{
-			//salaExposicao.acquire();
 			sala[vagaLivre++] = visitante;
-			System.out.println("% Entrei na Sala de Exposição. Sou o Visitante :"+ visitante.hashCode()+vagaLivre);
+			System.out.println("% Entrei na Sala de Exposição. Sou o Visitante :"+ visitante.hashCode());
 	}
 
 	public void openExposicao() {
