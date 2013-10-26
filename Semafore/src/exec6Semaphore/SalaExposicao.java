@@ -4,51 +4,59 @@ import java.util.concurrent.Semaphore;
 
 public class SalaExposicao {
 
-	Visitante[] sala;
-	int vagaLivre;
-	int tempoDeExposicao;
-	int vagas;
-	Semaphore semaphore;
+	private Visitante[] sala;
+	private int vagaLivre;
+	private int vagas;
+	private Semaphore portaria;
+	private Semaphore expositor;
+	private Semaphore salaExposicao;
 
-	public SalaExposicao(int vagas, int tempoDeExposicao) {
+	public SalaExposicao(int vagas) {
 		sala = new Visitante[vagas];
-		if (tempoDeExposicao < 1)
-			tempoDeExposicao = 1;
 		vagaLivre = 0;
 		this.vagas = vagas;
-		semaphore = new Semaphore(vagas);
-		(new Expositor(this, tempoDeExposicao)).start();
+		portaria = new Semaphore(0);
+		expositor = new Semaphore(0);
+		salaExposicao = new Semaphore(1);
+		(new Expositor(this,expositor)).start();
 	}
 
-	public boolean entrarNaExposicao(Visitante visitante)
-			throws InterruptedException {
-		if (vagaLivre < sala.length) {
+	public void entrarNaExposicao(Visitante visitante) throws InterruptedException{
 			sala[vagaLivre++] = visitante;
-			System.out
-					.println("% Entrei na Sala de Exposição. Sou o Visitante :"
-							+ visitante.getId());
-			semaphore.acquire();
-			return true;
-		} else {
-			System.out.println("# Esperando para entrar. Sou o Visitante :"
-					+ visitante.getId());
-		}
-		semaphore.acquire();
-		return false;
+			System.out.println("% Entrei na Sala de Exposição. Sou o Visitante :"+ visitante.hashCode());
 	}
 
 	public void openExposicao() {
-		semaphore.release(vagaLivre);
-		vagaLivre = 0;
+		portaria.release();
 	}
 
-	public void encerrarExposicao() {
+	public void sairDaExposicao() {
+		if (vagaLivre < vagas) {
+			return;
+		}
 		for (Visitante visitante : sala) {
 			if (visitante != null) {
 				visitante.sai();
 			}
 		}
+		vagaLivre = 0;
 		sala = new Visitante[vagas];
+	}
+
+	public int getVagas() {
+		return vagas;
+	}
+
+	public Semaphore getSemaPortaria() {
+		return portaria;
+	}
+	
+	public Semaphore getSemaExpositor() {
+		return expositor;
+	}
+
+	public Semaphore getSemaSalaExpositor() {
+		return salaExposicao;
 	}
 
 }

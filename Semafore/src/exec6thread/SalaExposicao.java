@@ -2,38 +2,31 @@ package exec6thread;
 
 public class SalaExposicao {
 
-	Visitante[] sala;
-	int vagaLivre;
-	int tempoDeExposicao;
-	int vagas;
+	private Visitante[] sala;
+	private int vagaLivre;
+	private int vagas;
+	private Expositor expositor;
 
-	public SalaExposicao(int vagas, int tempoDeExposicao) {
+	public SalaExposicao(int vagas) {
 		sala = new Visitante[vagas];
-		if (tempoDeExposicao < 1)
-			tempoDeExposicao = 1;
 		vagaLivre = 0;
 		this.vagas = vagas;
-		(new Expositor(this, tempoDeExposicao)).start();
+		expositor = new Expositor(this);
 	}
 
-	public synchronized boolean entrarNaExposicao(Visitante visitante)
+	public synchronized void entrarNaExposicao(Visitante visitante)
 			throws InterruptedException {
 		wait();
-		if (vagaLivre < sala.length) {
-			sala[vagaLivre++] = visitante;
-			System.out
-					.println("% Entrei na Sala de Exposição. Sou o Visitante :"
-							+ visitante.getId());
-			return true;
+		sala[vagaLivre++] = visitante;
+		System.out.println("% Entrei na Sala de Exposição. Sou o Visitante :"
+				+ visitante.hashCode());
+	}
+
+	public synchronized void abrirOuEncerrarExposicao() throws InterruptedException {
+		if (vagaLivre < vagas) {
+			notify();
+			return;
 		}
-		return false;
-	}
-
-	public synchronized void openExposicao() {
-		notifyAll();
-	}
-
-	public synchronized void encerrarExposicao() {
 		for (Visitante visitante : sala) {
 			if (visitante != null) {
 				visitante.sai();
@@ -41,6 +34,14 @@ public class SalaExposicao {
 		}
 		sala = new Visitante[vagas];
 		vagaLivre = 0;
+	}
+
+	public Expositor getThreadExpositor() {
+		return expositor;
+	}
+
+	public void startExposicao() {
+		expositor.start();
 	}
 
 }
