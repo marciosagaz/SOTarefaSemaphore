@@ -11,9 +11,9 @@ public class Expositor extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-			salaExposicao.openExposicao();
 			try {
-				salaExposicao.encerrarExposicao();
+				//sleep(5000);
+				salaExposicao.abrirOuEncerrarExposicao();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

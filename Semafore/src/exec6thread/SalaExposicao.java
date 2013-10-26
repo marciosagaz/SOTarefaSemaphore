@@ -20,16 +20,11 @@ public class SalaExposicao {
 		sala[vagaLivre++] = visitante;
 		System.out.println("% Entrei na Sala de Exposição. Sou o Visitante :"
 				+ visitante.hashCode());
-		//notify();
 	}
 
-	public synchronized void openExposicao() {
-		notify();
-	}
-
-	public synchronized void encerrarExposicao() throws InterruptedException {
-		//wait();
+	public synchronized void abrirOuEncerrarExposicao() throws InterruptedException {
 		if (vagaLivre < vagas) {
+			notify();
 			return;
 		}
 		for (Visitante visitante : sala) {
