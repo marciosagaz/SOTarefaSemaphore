@@ -9,7 +9,7 @@ public class Main {
 		Mesa m=new Mesa(); 
 		Cozinheiro c1=new Cozinheiro(0,m);
 		for (int i = 0; i < 10;i++){
-			Selvagem g1= new Selvagem(1,m);
+			Selvagem g1= new Selvagem(m);
 			g1.start();
 		}
 		c1.start();
