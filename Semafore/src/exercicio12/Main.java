@@ -7,7 +7,7 @@ public class Main {
 	 */
 	public static void main(String[] args){ 
 		Mesa m=new Mesa(); 
-		Cozinheiro c1=new Cozinheiro(0,m);
+		Cozinheiro c1=new Cozinheiro(m);
 		for (int i = 0; i < 10;i++){
 			Selvagem g1= new Selvagem(m);
 			g1.start();
