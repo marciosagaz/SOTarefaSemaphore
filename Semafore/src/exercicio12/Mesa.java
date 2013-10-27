@@ -3,8 +3,6 @@ package exercicio12;
 import java.util.LinkedList;
 import java.util.concurrent.Semaphore;
 
-import exec6Semaphore.Visitante;
-
 public class Mesa {
 	final static int NMAXJAVALIS=10; 
 	private LinkedList<Javali> javalis = new LinkedList<Javali>(); 
