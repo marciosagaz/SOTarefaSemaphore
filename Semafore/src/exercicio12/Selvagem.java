@@ -11,11 +11,11 @@ class Selvagem extends Thread{
 
 	public void run(){ 
 		Javali j; 
-		while(nunidades!=20){ 
+		while(true){ 
 			j=m.get(); 
-			System.out.println("Selvagem("+ id + ") retirou da mesa o javali"+j); 
+			System.out.println("Selvagem()"+this.getId()); 
 			nunidades++; 
 		} 
-		System.out.println("Selvagem(" + id + ") parou de comer e comeu "+ nunidades +" javalis"); 
+//		System.out.println("Selvagem(" + id + ") parou de comer e comeu "+ nunidades +" javalis"); 
 	}
 }

@@ -11,11 +11,11 @@ class Cozinheiro extends Thread {
 
 	public void run(){ 
 		Javali j; 
-		while(nunidades!=20){ 
+		while(true){ 
 			j=new Javali(++nunidades,id); 
-			System.out.println("Cozinheiro("+ id + ") coloca na mesa o seu javali"+j); 
+			System.out.println("Cozinheiro()"+this.getId()); 
 			m.put(j); 
 		} 
-		System.out.println("Cozinheiro("+ id + ") parou de cozinhar e cozinhou "+ nunidades +" javalis"); 
+//		System.out.println("Cozinheiro("+ id + ") parou de cozinhar e cozinhou "+ nunidades +" javalis"); 
 	} 
 } 
